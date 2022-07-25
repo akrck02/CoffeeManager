@@ -1,4 +1,5 @@
 import App from "../../App.js";
+import { Config } from "../../config/Config.js";
 import { UIComponent } from "../../lib/gtd/web/uicomponent.js";
 import { ViewUI } from "../../lib/gtdf/views/ViewUI.js";
 
@@ -59,6 +60,18 @@ export default class RegisterView extends ViewUI {
             text: App.getBundle().login.GO,
         })
         button.appendTo(this);
+
+
+        const loginLink = new UIComponent({
+            type : "a",
+            text : App.getBundle().home.LOGIN,
+            attributes : {
+                href : Config.VIEWS.LOGIN
+            }
+        })
+
+        loginLink.appendTo(this);
+
 
         this.appendTo(container);
     }

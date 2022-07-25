@@ -51,8 +51,9 @@ export class Config {
     };
 
     public static API = {
-        URL : "http://127.0.0.1:3333/api/v1/",
-        PING : "http://127.0.0.1:3333/api/v1/ping/",
+        URL : "http://127.0.0.1:8029/api/v1/",
+        PING : "http://127.0.0.1:8029/api/v1/ping/",
+        LOGIN : "http://127.0.0.1:8029/api/v1/login/",
     };
 
 

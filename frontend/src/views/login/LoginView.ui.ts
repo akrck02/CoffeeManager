@@ -1,7 +1,9 @@
 import App from "../../App.js";
+import { Config } from "../../config/Config.js";
 import { getMaterialIcon } from "../../lib/gtd/material/materialicons.js";
 import { UIComponent } from "../../lib/gtd/web/uicomponent.js";
 import { ViewUI } from "../../lib/gtdf/views/ViewUI.js";
+import LoginCore from "./LoginView.core.js";
 
 
 export default class LoginView extends ViewUI {
@@ -21,7 +23,7 @@ export default class LoginView extends ViewUI {
         })
     }
 
-    public show(params : string[], container : UIComponent): void {
+    public async show(params : string[], container : UIComponent): void {
 
 
         const title = new UIComponent({
@@ -59,6 +61,8 @@ export default class LoginView extends ViewUI {
             id: LoginView.GO_BUTTON_ID,
             text: App.getBundle().login.GO + "&nbsp;",
         })
+        button.appendTo(this);
+
 
         const coffeeIcon = getMaterialIcon("expand",{
             size: "1.5rem",
@@ -68,8 +72,18 @@ export default class LoginView extends ViewUI {
         coffeeIcon.element.style.transform = "rotate(-90deg)";
         coffeeIcon.appendTo(button);
 
-        button.appendTo(this);
 
+        const registerLink = new UIComponent({
+            type : "a",
+            text : App.getBundle().home.REGISTER,
+            attributes : {
+                href : Config.VIEWS.REGISTER
+            }
+        })
+
+        registerLink.appendTo(this);
+
+        await LoginCore.login();
         this.appendTo(container);
     }
 
