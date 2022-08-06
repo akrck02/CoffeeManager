@@ -13,7 +13,7 @@ export default class LoginView extends ViewUI {
     private static USERNAME_ID = "username";
     private static PASSWORD_ID = "password";
     private static GO_BUTTON_ID = "go-button";
-
+    private static GO_LINK_ID = "go-link";
     
     public constructor(){
         super({
@@ -23,8 +23,7 @@ export default class LoginView extends ViewUI {
         })
     }
 
-    public async show(params : string[], container : UIComponent): void {
-
+    public async show(params : string[], container : UIComponent): Promise<void> {
 
         const title = new UIComponent({
             type: "h1",
@@ -75,6 +74,7 @@ export default class LoginView extends ViewUI {
 
         const registerLink = new UIComponent({
             type : "a",
+            id: LoginView.GO_LINK_ID,
             text : App.getBundle().home.REGISTER,
             attributes : {
                 href : Config.VIEWS.REGISTER
@@ -82,8 +82,6 @@ export default class LoginView extends ViewUI {
         })
 
         registerLink.appendTo(this);
-
-        await LoginCore.login();
         this.appendTo(container);
     }
 

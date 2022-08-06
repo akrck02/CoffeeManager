@@ -18,7 +18,7 @@ export default class UserService {
         let params = {
             username : req.body.username,
             password : CryptoService.oneWayEncrypt(req.body.password),
-            device : req.body.device 
+            device : req.ip
         }
 
         // Check the given parameters and if they're missing, return,
@@ -54,7 +54,7 @@ export default class UserService {
         let params = {
             username : req.body.username,
             password : CryptoService.oneWayEncrypt(req.body.password),
-            device : req.body.device
+            device : req.ip
         }
 
         // Check given parameters and if they're missing, return 

@@ -65,7 +65,6 @@ export default class UserData {
                 auth
             );
 
-
             if (!result || !result.lastID) {
                 return USER_REGISTER_FAILED;
             }

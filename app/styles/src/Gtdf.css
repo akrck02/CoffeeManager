@@ -9,3 +9,13 @@
 .accent-hover:hover{
     color: var(--accent-color);
 }
+
+html, body {
+    min-height: 100% !important;
+    height: auto;
+}
+
+#view-container-box {
+    min-height: 100% !important;
+    width: 100%;
+}

@@ -1,7 +1,8 @@
 import App from "../../App.js";
 import { Config } from "../../config/Config.js";
-import { UIComponent } from "../../lib/gtd/web/uicomponent.js";
+import { setEvents, UIComponent } from "../../lib/gtd/web/uicomponent.js";
 import { ViewUI } from "../../lib/gtdf/views/ViewUI.js";
+import RegisterCore from "./RegisterView.core.js";
 
 
 export default class RegisterView extends ViewUI {
@@ -11,7 +12,7 @@ export default class RegisterView extends ViewUI {
     private static USERNAME_ID = "username";
     private static PASSWORD_ID = "password";
     private static GO_BUTTON_ID = "go-button";
-
+    private static GO_LINK_ID = "go-link";
     
     public constructor(){
         super({
@@ -61,9 +62,15 @@ export default class RegisterView extends ViewUI {
         })
         button.appendTo(this);
 
+        setEvents(button.element, {
+            click: async () => {
+                await RegisterCore.register((username.element as HTMLInputElement).value, (password.element as HTMLInputElement).value);
+            }
+        });
 
         const loginLink = new UIComponent({
             type : "a",
+            id: RegisterView.GO_LINK_ID,
             text : App.getBundle().home.LOGIN,
             attributes : {
                 href : Config.VIEWS.LOGIN
@@ -75,5 +82,4 @@ export default class RegisterView extends ViewUI {
 
         this.appendTo(container);
     }
-
 }

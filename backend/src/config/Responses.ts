@@ -55,3 +55,15 @@ export const TOKEN_UPDATE_SUCCESS = new Promise<HttpResponse>((r) => r({
 
 
 
+export const DRINK_INSERT_FAILED = new Promise<HttpResponse>((r) => r({
+    success: false, 
+    message:"Sorry, cannot register the new drink.", 
+    code : 500
+}));
+
+
+export const FOOD_INSERT_FAILED = new Promise<HttpResponse>((r) => r({
+    success: false, 
+    message:"Sorry, cannot register the new food.", 
+    code : 500
+}));

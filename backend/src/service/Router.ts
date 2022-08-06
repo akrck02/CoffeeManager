@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { PONG } from "../config/Responses";
 import Database from "../Database";
 import IApiFunctionSet from "../lib/IApiFunctionSet";
+import ItemService from "./ItemService";
 import UserService from "./UserService";
 
 export default class Router {
@@ -26,6 +27,8 @@ export default class Router {
             "ping": () => PONG,
             "login" : this.ApiEndpoint(UserService.login, database),
             "register" : this.ApiEndpoint(UserService.register, database),
+            "drink/update" : this.ApiEndpoint(ItemService.drinkUpdate, database),
+            "food/update" : this.ApiEndpoint(ItemService.foodUpdate, database),
         }
 
         return paths;

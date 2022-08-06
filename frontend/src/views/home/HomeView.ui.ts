@@ -1,3 +1,4 @@
+import { config } from "../../../../node_modules/dotenv/lib/main.js";
 import App from "../../App.js";
 import Select from "../../components/select/Select.js";
 import { Config } from "../../config/Config.js";
@@ -6,6 +7,7 @@ import { getLanguageName } from "../../lang/Language.js";
 import StringTools from "../../lib/gtd/data/stringtools.js";
 import { setClasses, setEvents, setStyles, UIComponent } from "../../lib/gtd/web/uicomponent.js";
 import { ViewUI } from "../../lib/gtdf/views/ViewUI.js";
+import { UserService } from "../../services/UserService.js";
 import HomeCore from "./HomeView.core.js";
 
 export default class HomeView extends ViewUI {
@@ -30,12 +32,12 @@ export default class HomeView extends ViewUI {
 
     public show(params : string[], container : UIComponent): void {
 
-        /** 
-        if(isSmallDevice()){
-            new HomeViewMobile().show(params,container);
+        
+        if(UserService.checkAccessToken()){
+            Utils.redirect(Config.VIEWS.MANAGER,[]);
             return;
         }
-        */
+    
         
         const lang = StringTools.toNormalCase(getLanguageName(Config.getLanguage()));
         const select = new Select(HomeCore.getLanguages(),HomeCore.setLanguage,lang);
@@ -52,7 +54,7 @@ export default class HomeView extends ViewUI {
             id: HomeView.LOGO_ID,
             attributes : {
                 src: Config.PATHS.ICONS + "logo.svg",
-                alt: "GTD Framework logo"
+                alt: "CoffeeManager logo"
             },
         })
 

@@ -1,17 +1,39 @@
 require('dotenv').config();
-const liveServer = require("live-server");
- 
 
-console.log(process.env.PORT);
-console.log(process.env.IP);
+const express = require('express')
+const app = express()
 
 const params = {
     port: process.env.PORT, 
     host: process.env.IP,
     root: ".",
-    open: false,
-    wait: 1000, 
-    logLevel: 2, 
-    middleware: [function(req, res, next) { next(); }]
 };
-liveServer.start(params);
+
+const statics = {
+    "/" : "index.html",
+    "/favicon.ico" : "favicon.ico",
+    "/readme" : "README.md",
+    "/app" : "app",
+    "/resources/icons" : "resources/icons",
+    "/backend/out" : "backend/out",
+    "/frontend/out" : "frontend/out",
+    "/frontend/temp" : "frontend/temp"
+}
+
+for (const endpoint in statics) {
+    app.use(endpoint,express.static(statics[endpoint]));
+    console.log(`Asigning path ${endpoint} to ${statics[endpoint]}`);
+}
+
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Oauth, Device");
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
+
+app.listen(params.port, () => {
+    console.log(`Web server listening on ${params.host}:${params.port}`)
+})

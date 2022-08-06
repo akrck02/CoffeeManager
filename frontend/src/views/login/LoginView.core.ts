@@ -4,12 +4,11 @@ import { UserService } from "../../services/UserService.js"
 export default class LoginCore implements ViewCore {
 
 
-    public static async login(){
-
-        const res = await UserService.login("irati","0810");
-        res.json();
-        console.log(res);
+    public static async login(username : string, password : string ) {
         
+        const res = await UserService.login(username, password);
+        res.json();
+    
     }
 
 

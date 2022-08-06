@@ -15,12 +15,13 @@ export class Config {
 
     public static VARIABLES = {
         ANIMATIONS : "ANIMATIONS",
-        LANGUAGE : "LANG"
+        LANGUAGE : "LANG",
+        TOKEN : "TOKEN",
     }
 
     //global runtime configurations
     public static BASE = {
-        APP_NAME: "Gtdf-App",
+        APP_NAME: "CoffeeManager",
         APP_VERSION: "v.x.x",
         HOST: "127.0.0.1",
         PORT: 80,
@@ -46,6 +47,7 @@ export class Config {
         HOME: "../app/#/home/",
         REGISTER: "../app/#/register/",
         LOGIN: "../app/#/login/",
+        MANAGER: "../app/#/manager/",
         ERROR: "../app/#/error/",
         BLANK: "../app/#/blank/",
     };
@@ -54,6 +56,7 @@ export class Config {
         URL : "http://127.0.0.1:8029/api/v1/",
         PING : "http://127.0.0.1:8029/api/v1/ping/",
         LOGIN : "http://127.0.0.1:8029/api/v1/login/",
+        REGISTER : "http://127.0.0.1:8029/api/v1/register/",
     };
 
 
@@ -105,6 +108,19 @@ export class Config {
     public static getConfigVariable(key: string) : string{
         let localStorageConfiguration = this.getConfig();
         return localStorageConfiguration[key];
+    }
+
+
+    /**
+     *  Set the access token for the application
+     * @param token The access token
+     */
+    public static setAccessToken(token : string) {
+        this.setConfigVariable(this.VARIABLES.TOKEN, token);
+    }
+
+    public static getAccessToken() : string {
+        return  this.getConfigVariable(this.VARIABLES.TOKEN);
     }
 
     /**
