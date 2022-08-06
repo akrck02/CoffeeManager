@@ -12,13 +12,16 @@ export default class ItemData {
     public static async drinkCreateOrUpdate(params: IItem, db: Database): Promise<String | HttpResponse> {
 
         // Try updating the drink if it exists
-        const SQL_QUERY_UPDATE = "UPDATE drink SET name=?, price=? WHERE name=?";
+        const SQL_QUERY_UPDATE = "UPDATE drink SET price=? WHERE name=?";
 
         const result_update = await db.get().run(
             SQL_QUERY_UPDATE,
-            params.name,
-            params.price
+            params.price,
+            params.name
         );
+
+        console.log(result_update);
+        
 
         if (result_update && result_update.changes > 0) {
             return {
@@ -50,6 +53,29 @@ export default class ItemData {
 
     public static async foodCreateOrUpdate(params: IItem, db: Database): Promise<String | HttpResponse> {
 
+        
+        // Try updating the drink if it exists
+        const SQL_QUERY_UPDATE = "UPDATE food SET price=? WHERE name=?";
+
+        const result_update = await db.get().run(
+            SQL_QUERY_UPDATE,
+            params.price,
+            params.name
+        );
+
+        console.log(result_update);
+        
+
+        if (result_update && result_update.changes > 0) {
+            return {
+                success: true,
+                code: 200,
+                message: "Successfully updated new food item"
+            };;
+        }
+
+
+        // Insert that food
         const SQL_QUERY = "INSERT INTO food (name,price) VALUES (?,?)";
   
         const result = await db.get().run(
