@@ -11,6 +11,7 @@ const params = {
 
 const statics = {
     "/" : "index.html",
+    "/test" : "test.html",
     "/favicon.ico" : "favicon.ico",
     "/readme" : "README.md",
     "/app" : "app",

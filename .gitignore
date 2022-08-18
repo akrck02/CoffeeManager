@@ -3,5 +3,5 @@ node_modules
 app/styles/out
 frontend/out
 frontend/temp
-backend/out
+backend/01_template
 .env
