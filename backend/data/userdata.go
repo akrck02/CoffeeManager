@@ -32,7 +32,6 @@ func Login(params interfaces.LoginParams, db *sql.DB, logger *log.Logger) {
 		if err != nil {
 			panic(err)
 		}
-		logger.Info(username + " / " + password + " / " + auth)
 	}
 
 }
