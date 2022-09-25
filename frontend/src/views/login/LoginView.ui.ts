@@ -1,8 +1,9 @@
 import App from "../../App.js";
 import { Config } from "../../config/Config.js";
 import { getMaterialIcon } from "../../lib/gtd/material/materialicons.js";
-import { UIComponent } from "../../lib/gtd/web/uicomponent.js";
+import { setEvents, UIComponent } from "../../lib/gtd/web/uicomponent.js";
 import { ViewUI } from "../../lib/gtdf/views/ViewUI.js";
+import { UserService } from "../../services/UserService.js";
 import LoginCore from "./LoginView.core.js";
 
 
@@ -61,6 +62,17 @@ export default class LoginView extends ViewUI {
             text: App.getBundle().login.GO + "&nbsp;",
         })
         button.appendTo(this);
+
+        setEvents(button.element, {
+            click : () => {
+
+                const usr = (username.element as HTMLInputElement).value
+                const psw = (password.element as HTMLInputElement).value
+
+                const response = UserService.login(usr,psw);
+                response.json();
+            }
+        })
 
 
         const coffeeIcon = getMaterialIcon("expand",{

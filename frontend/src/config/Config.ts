@@ -23,7 +23,7 @@ export class Config {
     public static BASE = {
         APP_NAME: "CoffeeManager",
         APP_VERSION: "v.x.x",
-        HOST: "127.0.0.1",
+        HOST: "192.168.159.128",
         PORT: 80,
         URL: location.href,
         ENVIRONMENT: ENVIRONMENT.DEVELOPMENT,
@@ -53,10 +53,10 @@ export class Config {
     };
 
     public static API = {
-        URL : "http://127.0.0.1:8029/api/v1/",
-        PING : "http://127.0.0.1:8029/api/v1/ping/",
-        LOGIN : "http://127.0.0.1:8029/api/v1/login/",
-        REGISTER : "http://127.0.0.1:8029/api/v1/register/",
+        URL : "http://192.168.159.128:8029/api/v1/",
+        PING : "http://192.168.159.128:8029/api/v1/ping/",
+        LOGIN : "http://192.168.159.128:8029/api/v1/login/",
+        REGISTER : "http://192.168.159.128:8029/api/v1/register/",
     };
 
 
