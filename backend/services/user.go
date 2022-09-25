@@ -31,10 +31,20 @@ func Login(c *gin.Context, db *sql.DB, logger *log.Logger) {
 		params.Password = oneWayEncrypt(params.Password)
 
 		// Check login or end request with error
-		data.Login(params, db, logger)
+		userDbData := data.Login(params, db, logger)
+		if userDbData == nil {
 
-		// Search device on database
-		//const device = getDevice(params.Device)
+			error := make(map[string]string)
+			error["message"] = "invalid credentials"
+			c.JSON(http.StatusForbidden, error)
+			return
+		}
+
+		c.JSON(http.StatusOK, userDbData)
+		return
+
+		//Search device on database
+		//const device = getDevice(userDbData["auth"],params.Device)
 
 		/* if exists update with new token
 		if device != nil {
@@ -45,8 +55,7 @@ func Login(c *gin.Context, db *sql.DB, logger *log.Logger) {
 
 			createDeviceWithToken(params.Username, params.Password, params.Username, token)
 		}*/
-		c.IndentedJSON(http.StatusOK, pingResponse{Message: "logged in"})
-		return
+
 	}
 
 	c.IndentedJSON(http.StatusBadRequest, pingResponse{Message: "Incorrect parameters"})
