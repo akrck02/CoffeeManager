@@ -17,6 +17,7 @@ export class Config {
         ANIMATIONS : "ANIMATIONS",
         LANGUAGE : "LANG",
         TOKEN : "TOKEN",
+        USERNAME : "USERNAME",
     }
 
     //global runtime configurations
@@ -152,6 +153,21 @@ export class Config {
      */
     public static getLanguage() : string {
         return getLanguage(this.getConfigVariable(this.VARIABLES.LANGUAGE));
+    }
+
+    /**
+     * Set the username
+     */
+    public static setUsername(username : string) {
+        this.setConfigVariable(this.VARIABLES.USERNAME,username);
+    }
+
+    /**
+     * Get the current app language
+     * @returns The app language
+     */
+    public static getUsername() : string {
+        return getLanguage(this.getConfigVariable(this.VARIABLES.USERNAME));
     }
 
 }

@@ -5,6 +5,8 @@ import { setEvents, UIComponent } from "../../lib/gtd/web/uicomponent.js";
 import { ViewUI } from "../../lib/gtdf/views/ViewUI.js";
 import { UserService } from "../../services/UserService.js";
 import LoginCore from "./LoginView.core.js";
+import Utils from "../../core/Utils.js";
+import { config } from "../../../../node_modules/dotenv/lib/main.js";
 
 
 export default class LoginView extends ViewUI {
@@ -70,6 +72,18 @@ export default class LoginView extends ViewUI {
                 const psw = (password.element as HTMLInputElement).value
 
                 const response = UserService.login(usr,psw);
+
+                response.success((json) => {
+
+                    const auth = json.auth;
+                    const username = json.username;
+
+                    Config.setUsername(username);
+                    Config.setAccessToken(auth);
+                    
+                    Utils.redirect(Config.VIEWS.HOME,[],true);                    
+                })
+
                 response.json();
             }
         })

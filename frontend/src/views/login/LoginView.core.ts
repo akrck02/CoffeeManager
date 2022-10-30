@@ -12,4 +12,9 @@ export default class LoginCore implements ViewCore {
     }
 
 
+    public static async redirectToHome() {
+        
+    }
+
+
 }
