@@ -13,3 +13,13 @@ view#manager #body {
     background : #f1f1f1;
     border-radius: 1rem;
 }
+
+view#manager #body.mobile {
+    min-height: unset;
+    height: calc(100vh - 7rem);
+    margin: 1rem;
+    margin-bottom: 0;
+    width: calc(100% - 2rem);
+    background : #f1f1f1;
+    border-radius: 1rem;
+}

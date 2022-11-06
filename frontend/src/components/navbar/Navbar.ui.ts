@@ -5,11 +5,14 @@ export default class Navbar extends UIComponent {
 
     private buttons : UIComponent[];
 
-    constructor() {
+    constructor(mobile : boolean = false) {
+
+        const classes = mobile ? ["mobile"] : [];
+
         super({
             type: "nav",
             id : "navbar",
-            classes : ["box-column"],            
+            classes : classes            
         });
 
         this.buttons = [];
@@ -44,7 +47,7 @@ export default class Navbar extends UIComponent {
         }
 
         const iconComp = getMaterialIcon(icon,{
-            size: "1.5rem",
+            size: "1.75rem",
             fill: "#404040",
         });
 
@@ -59,6 +62,9 @@ export default class Navbar extends UIComponent {
      * @param index The index of the button to select
      */
     public selectButton(index : number) : void {
+
+        this.element.dataset.selected = index + "";
+
         this.buttons.forEach((button, i) => {
             if (i === index) {
                 button.element.classList.add("selected");
