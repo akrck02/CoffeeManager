@@ -25,7 +25,8 @@ export class Config {
         APP_NAME: "CoffeeManager",
         APP_VERSION: "v.x.x",
         HOST: "192.168.0.28",
-        PORT: 80,
+        PORT: 8029,
+        API_PORT: 8030,
         URL: location.href,
         ENVIRONMENT: ENVIRONMENT.DEVELOPMENT,
         DEBUG: true,
@@ -59,10 +60,10 @@ export class Config {
     };
 
     public static API = {
-        URL : "http://192.168.0.28:8029/api/v1/",
-        PING : "http://192.168.0.28:8029/api/v1/ping/",
-        LOGIN : "http://192.168.0.28:8029/api/v1/login/",
-        REGISTER : "http://192.168.0.28:8029/api/v1/register/",
+        URL : "http://$1:$2/api/v1/",
+        PING : "http://$1:$2/api/v1/ping/",
+        LOGIN : "http://$1:$2/api/v1/login/",
+        REGISTER : "http://$1:$2/api/v1/register/",
     };
 
 
@@ -78,6 +79,12 @@ export class Config {
         if(Config.getConfigVariable(this.VARIABLES.LANGUAGE) == undefined) {
             this.setLanguage(getLanguage(navigator.language));
         }
+
+        for (const key in this.API) {
+            this.API[key] = this.API[key].replace("$1",Config.BASE.HOST)
+            this.API[key] = this.API[key].replace("$2",Config.BASE.PORT)
+        }
+
     }
 
     /**
