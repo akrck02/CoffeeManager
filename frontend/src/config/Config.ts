@@ -17,14 +17,16 @@ export class Config {
         ANIMATIONS : "ANIMATIONS",
         LANGUAGE : "LANG",
         TOKEN : "TOKEN",
+        USERNAME : "USERNAME",
     }
 
     //global runtime configurations
     public static BASE = {
         APP_NAME: "CoffeeManager",
         APP_VERSION: "v.x.x",
-        HOST: "192.168.159.128",
-        PORT: 80,
+        HOST: "192.168.0.28",
+        PORT: 8029,
+        API_PORT: 8030,
         URL: location.href,
         ENVIRONMENT: ENVIRONMENT.DEVELOPMENT,
         DEBUG: true,
@@ -48,15 +50,20 @@ export class Config {
         REGISTER: "../app/#/register/",
         LOGIN: "../app/#/login/",
         MANAGER: "../app/#/manager/",
+        MANAGER_CONNECT:"../app/#/manager/connect/",
+        MANAGER_MENU:"../app/#/manager/menu/",
+        MANAGER_LIST:"../app/#/manager/list/",
+        MANAGER_ORDER:"../app/#/manager/order/",
+        MANAGER_AUTO:"../app/#/manager/auto/",
         ERROR: "../app/#/error/",
         BLANK: "../app/#/blank/",
     };
 
     public static API = {
-        URL : "http://192.168.159.128:8029/api/v1/",
-        PING : "http://192.168.159.128:8029/api/v1/ping/",
-        LOGIN : "http://192.168.159.128:8029/api/v1/login/",
-        REGISTER : "http://192.168.159.128:8029/api/v1/register/",
+        URL : "http://$1:$2/api/v1/",
+        PING : "http://$1:$2/api/v1/ping/",
+        LOGIN : "http://$1:$2/api/v1/login/",
+        REGISTER : "http://$1:$2/api/v1/register/",
     };
 
 
@@ -72,6 +79,12 @@ export class Config {
         if(Config.getConfigVariable(this.VARIABLES.LANGUAGE) == undefined) {
             this.setLanguage(getLanguage(navigator.language));
         }
+
+        for (const key in this.API) {
+            this.API[key] = this.API[key].replace("$1",Config.BASE.HOST)
+            this.API[key] = this.API[key].replace("$2",Config.BASE.PORT)
+        }
+
     }
 
     /**
@@ -152,6 +165,21 @@ export class Config {
      */
     public static getLanguage() : string {
         return getLanguage(this.getConfigVariable(this.VARIABLES.LANGUAGE));
+    }
+
+    /**
+     * Set the username
+     */
+    public static setUsername(username : string) {
+        this.setConfigVariable(this.VARIABLES.USERNAME,username);
+    }
+
+    /**
+     * Get the current app language
+     * @returns The app language
+     */
+    public static getUsername() : string {
+        return getLanguage(this.getConfigVariable(this.VARIABLES.USERNAME));
     }
 
 }

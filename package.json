@@ -11,7 +11,7 @@
     "compile-client": "tsc --project ./frontend/",
     "compile-client-watch": "tsc --project ./frontend/ -w",
     "serve": "node ./serve.js",
-    "api": "node ./backend/out/HttpService.js"
+    "api": " ./backend/start.sh"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,10 @@
 import Navbar from "../../components/navbar/Navbar.ui.js";
+import { isSmallDevice } from "../../lib/gtd/web/responsivetools.js";
 import { UIComponent } from "../../lib/gtd/web/uicomponent.js";
 import { ViewUI } from "../../lib/gtdf/views/ViewUI.js";
+import DevelopmentView from "../development/Development.ui.js";
+import HomeViewMobile from "../home/HomeView.mobile.ui.js";
+import ManagerViewMobile from "./ManagerView.mobile.ui.js";
 
 export default class ManagerView extends ViewUI {
 
@@ -54,8 +58,14 @@ export default class ManagerView extends ViewUI {
 
     public async show(params : string[], container : UIComponent): Promise<void> {
         
-       
-        this.appendTo(container);
+        if(isSmallDevice()){
+            new ManagerViewMobile().show(params,container);
+            return;
+        }
+        
+        new DevelopmentView().show(params,container);
+
+        //this.appendTo(container);
     }
 
     
